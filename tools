@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# Do not change
+START=/opt/tools
+
+# Source config
+source $START/.config
+
+# Env setup
+server_name=$(hostname) 
+COLUMNS=1
+
+# Custom parameters
+if [[ $1 == 'base' ]]; then
+    bash /opt/tools/scripts/Install/base.sh
+elif [[ $1 == 'shell' ]]; then
+    bash /opt/tools/scripts/Install/synthshell.sh
+elif [[ $1 == 'bs' ]]; then
+    bash /opt/tools/scripts/Install/base.sh
+    bash /opt/tools/scripts/Install/synthshell.sh
+elif [[ $1 == '-h' ]]; then
+    echo "" 
+    echo ""
+    echo -e "Tools Help" | lolcat -t -a
+    echo -e "===========" | lolcat -t -i
+    echo ""
+    echo -e "${green}${bold}tools:$clear runs tools menu $clear"
+    echo -e "${green}${bold}tools base:$clear run base installation only $clear"
+    echo -e "${green}${bold}tools shell:$clear run shell customization only $clear"
+    echo -e "${green}${bold}tools bs:$clear run base install and shell customizer $clear"
+    echo -e "${green}${bold}tools vm:$clear place init file in root directory $clear"
+else
+    function main() {
+        trap script_trap_err ERR
+        trap script_trap_exit EXIT
+        lock_init system
+        menu
+    }
+
+    main
+fi
