@@ -16,7 +16,7 @@ fi
 mkdir -p $INST
 apt-get install -y ruby wget curl bc sysstat jq moreutils perl multitail tree joe htop git figlet dialog
 cd $INST
-git clone https://git.tacoma.uw.edu/bfritz/fr.git .
+git clone https://github.com/uwbfritz/fr.git .
 ln -s $INST/tools /usr/bin/tools
 echo "sed -i 's~START=.*~START=$INST~' $INST/tools" | bash
 echo "sed -i 's~INST=.*~INST=$INST~' $INST/.config" | bash
